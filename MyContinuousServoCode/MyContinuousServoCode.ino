@@ -3,8 +3,8 @@
 
 #include <Servo.h> 
  
-Servo myservo; // create servo object to control a servo 
-Servo myservo2;
+Servo servoLeft; // create servo object to control a servo 
+Servo servoRight;
 
 int bitToSet = 8;  // In case you want to control from the command prompt
 const int pingPin = 11;  // distance sensor Pin
@@ -16,9 +16,9 @@ void setup() {
   
     Serial.begin(9600);
     Serial.println("reset");
-    myservo.attach(9); // attaches the servo on pin 9 to the servo object 8 & 9 make two servos
-    myservo2.attach(8);
-    myservo.writeMicroseconds(1500); // default pulse to hold still (Calibration on servos to center on this frequency) 
+    servoLeft.attach(9); // attaches the servo on pin 9 to the servo object 8 & 9 make two servos
+    servoRight.attach(8);
+    servoLeft.writeMicroseconds(1500); // default pulse to hold still (Calibration on servos to center on this frequency) 
 
 }
 
@@ -71,19 +71,19 @@ void loop() {
 
   if (inches < 6)
   {
-    if(isGoing != "right")
+    if(isGoing != "stop")
       {
-        isGoing = "right";
-        turnDirection("right");
+        isGoing = "stop";
+        turnDirection("stop");
       }
 
   }
   else
   {
-    if(isGoing != "stop")
+    if(isGoing != "right")
     {
-      isGoing = "stop";
-      turnDirection("stop"); 
+      isGoing = "right";
+      turnDirection("right"); 
     }
   }
   
@@ -93,18 +93,18 @@ void turnDirection(String direction) {
 
     if (direction == "left") {
         Serial.println("left");
-        myservo.writeMicroseconds(1800);
-        myservo2.writeMicroseconds(1800);
+        servoLeft.writeMicroseconds(1300);
+        servoRight.writeMicroseconds(1800);
     }
     if (direction == "right") {
         Serial.println("right");
-        myservo.writeMicroseconds(1300);
-        myservo2.writeMicroseconds(1300);
+        servoLeft.writeMicroseconds(1800);
+        servoRight.writeMicroseconds(1300);
     }
     if (direction == "stop") {
         Serial.println("stop");
-        myservo.writeMicroseconds(1500);
-        myservo2.writeMicroseconds(1500);
+        servoLeft.writeMicroseconds(1500);
+        servoRight.writeMicroseconds(1500);
     }
 
 }
