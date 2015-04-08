@@ -94,12 +94,12 @@ void turnDirection(String direction) {
 
     if (direction == "left") {
         Serial.println("left");
-        servoLeft.writeMicroseconds(1300);
+        servoLeft.writeMicroseconds(1800);
         servoRight.writeMicroseconds(1800);
     }
     if (direction == "right") {
         Serial.println("right");
-        servoLeft.writeMicroseconds(1800);
+        servoLeft.writeMicroseconds(1300);
         servoRight.writeMicroseconds(1300);
     }
     if (direction == "stop") {
@@ -110,7 +110,7 @@ void turnDirection(String direction) {
     if (direction == "forward") {
         Serial.println("forward");
         servoLeft.writeMicroseconds(1800);
-        servoRight.writeMicroseconds(1800);
+        servoRight.writeMicroseconds(1300);
     }
 
 }
