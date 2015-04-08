@@ -1,6 +1,7 @@
 //Parallax Continuous Rotation Servo  Combinted with Distance Sensor
 //http://learn.parallax.com/KickStart/900-00008 
-
+// Three pin Distance sensor
+// https://www.parallax.com/product/28015
 #include <Servo.h> 
  
 Servo servoLeft; // create servo object to control a servo 
@@ -18,8 +19,9 @@ void setup() {
     Serial.println("reset");
     servoLeft.attach(9); // attaches the servo on pin 9 to the servo object 8 & 9 make two servos
     servoRight.attach(8);
-    servoLeft.writeMicroseconds(1500); // default pulse to hold still (Calibration on servos to center on this frequency) 
-
+    turnDirection("stop"); // default pulse to hold still 1500 (Calibration on servos to center on this frequency) 
+    delay(1000);
+    turnDirection("forward");
 }
 
 void loop() {
@@ -71,20 +73,19 @@ void loop() {
 
   if (inches < 6)
   {
-    if(isGoing != "stop")
-      {
-        isGoing = "stop";
-        turnDirection("stop");
-      }
-
-  }
-  else
-  {
     if(isGoing != "right")
     {
       isGoing = "right";
-      turnDirection("right"); 
+      turnDirection("right");  // Derek Zoolander: "I’m not an ambi-turner. I can't turn left."
     }
+  }
+  else
+  {
+     if(isGoing != "forward")
+      {
+        isGoing = "forward";
+        turnDirection("forward");
+      }
   }
   
 }
@@ -105,6 +106,11 @@ void turnDirection(String direction) {
         Serial.println("stop");
         servoLeft.writeMicroseconds(1500);
         servoRight.writeMicroseconds(1500);
+    }
+    if (direction == "forward") {
+        Serial.println("forward");
+        servoLeft.writeMicroseconds(1800);
+        servoRight.writeMicroseconds(1800);
     }
 
 }
