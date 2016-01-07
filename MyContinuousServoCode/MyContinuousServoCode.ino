@@ -12,7 +12,6 @@ const int pingPin = 11;  // distance sensor Pin
 int C;
 String isGoing = "stop"; // current state of servos
 
-
 void setup() {
   
     Serial.begin(9600);
@@ -71,7 +70,7 @@ void loop() {
   Serial.print("cm");
   Serial.println(" - ");
 
-  if (inches < 6)
+  if (inches < 12)
   {
     if(isGoing != "right")
     {
@@ -86,8 +85,7 @@ void loop() {
         isGoing = "forward";
         turnDirection("forward");
       }
-  }
-  
+  }  
 }
 
 void turnDirection(String direction) {
